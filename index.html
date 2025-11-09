@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Космічний Календар - Cosmic Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌌 Космічний Календар</h1>
+            <p class="subtitle">13.8 мільярдів років історії Всесвіту в масштабі одного року</p>
+        </header>
+
+        <div class="info-panel">
+            <div class="scale-info">
+                <h3>Масштаб часу:</h3>
+                <ul>
+                    <li><strong>1 секунда</strong> = ~438 років</li>
+                    <li><strong>1 хвилина</strong> = ~26,000 років</li>
+                    <li><strong>1 година</strong> = ~1.6 мільйонів років</li>
+                    <li><strong>1 день</strong> = ~38 мільйонів років</li>
+                    <li><strong>1 місяць</strong> = ~1.15 мільярдів років</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calendar-container">
+            <div class="timeline-controls">
+                <button id="zoom-in">+</button>
+                <button id="zoom-out">-</button>
+                <button id="reset-view">Повний рік</button>
+            </div>
+            <div id="calendar" class="calendar"></div>
+        </div>
+
+        <div class="event-details" id="event-details">
+            <h3>Деталі події</h3>
+            <div id="event-content">
+                <p>Виберіть подію на календарі для перегляду деталей</p>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3>Легенда:</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #ff6b6b;"></span>
+                    <span>Формування Всесвіту</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #4ecdc4;"></span>
+                    <span>Формування зірок і галактик</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #45b7d1;"></span>
+                    <span>Формування Сонячної системи</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #96ceb4;"></span>
+                    <span>Зародження життя</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #ffeaa7;"></span>
+                    <span>Еволюція життя</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background: #fd79a8;"></span>
+                    <span>Людство</span>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Дані базуються на науковій концепції Карла Сагана "Космічний Календар"</p>
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -3,6 +3,8 @@
 let currentView = 'year'; // year, month, day
 let selectedMonth = null;
 let selectedDay = null;
+let currentFilter = 'all';
+let searchTerm = '';
 
 // Initialize calendar on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,6 +16,42 @@ function setupEventListeners() {
     document.getElementById('zoom-in').addEventListener('click', zoomIn);
     document.getElementById('zoom-out').addEventListener('click', zoomOut);
     document.getElementById('reset-view').addEventListener('click', resetView);
+    
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', (e) => {
+        searchTerm = e.target.value.toLowerCase();
+        if (currentView === 'year') {
+            renderYearView();
+        } else if (currentView === 'month') {
+            renderMonthView(selectedMonth);
+        }
+    });
+    
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            currentFilter = e.target.dataset.category;
+            if (currentView === 'year') {
+                renderYearView();
+            } else if (currentView === 'month') {
+                renderMonthView(selectedMonth);
+            }
+        });
+    });
+}
+
+function filterEvents(events) {
+    return events.filter(event => {
+        const matchesCategory = currentFilter === 'all' || event.category === currentFilter;
+        const matchesSearch = !searchTerm || 
+            event.title.toLowerCase().includes(searchTerm) ||
+            event.titleEn.toLowerCase().includes(searchTerm) ||
+            event.description.toLowerCase().includes(searchTerm);
+        return matchesCategory && matchesSearch;
+    });
 }
 
 function renderYearView() {
@@ -49,10 +87,10 @@ function createMonthElement(monthIndex) {
     const daysInMonth = new Date(2024, monthIndex + 1, 0).getDate();
     
     // Get events for this month
-    const monthEvents = cosmicEvents.filter(event => {
+    const monthEvents = filterEvents(cosmicEvents.filter(event => {
         const [month] = event.date.split('-').map(Number);
         return month - 1 === monthIndex;
-    });
+    }));
 
     for (let day = 1; day <= daysInMonth; day++) {
         const dayElement = document.createElement('div');
@@ -107,10 +145,10 @@ function renderMonthView(monthIndex) {
     monthContainer.appendChild(monthTitle);
 
     const daysInMonth = new Date(2024, monthIndex + 1, 0).getDate();
-    const monthEvents = cosmicEvents.filter(event => {
+    const monthEvents = filterEvents(cosmicEvents.filter(event => {
         const [month] = event.date.split('-').map(Number);
         return month - 1 === monthIndex;
-    });
+    }));
 
     const timeline = document.createElement('div');
     timeline.className = 'timeline';

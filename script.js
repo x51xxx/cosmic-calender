@@ -370,13 +370,20 @@ document.addEventListener('DOMContentLoaded', () => {
     window.cosmicCalendar = new CosmicCalendar();
 });
 
-// Add some visual effects on scroll
+// Add some visual effects on scroll (optimized with requestAnimationFrame)
+let ticking = false;
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const stars = document.querySelectorAll('.stars, .stars2, .stars3');
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrolled = window.pageYOffset;
+            const stars = document.querySelectorAll('.stars, .stars2, .stars3');
 
-    stars.forEach((star, index) => {
-        const speed = (index + 1) * 0.5;
-        star.style.transform = `translateY(${scrolled * speed}px)`;
-    });
+            stars.forEach((star, index) => {
+                const speed = (index + 1) * 0.5;
+                star.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+            ticking = false;
+        });
+        ticking = true;
+    }
 });

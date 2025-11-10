@@ -16,15 +16,17 @@
     <div class="stars3"></div>
 
     <header class="header">
-        <div class="container">
-            <h1 class="title">
-                <span class="cosmic-icon">🌌</span>
-                Космічний Календар
-            </h1>
-            <p class="subtitle">13,8 мільярдів років історії Всесвіту на шкалі одного року</p>
+        <div class="container header-container">
+            <div class="header-left">
+                <h1 class="title">
+                    <span class="cosmic-icon">🌌</span>
+                    Космічний Календар
+                </h1>
+                <p class="subtitle">13,8 млрд років на шкалі одного року</p>
+            </div>
             <div class="language-switch">
-                <button class="lang-btn active" data-lang="uk">🇺🇦 Українська</button>
-                <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+                <button class="lang-btn active" data-lang="uk">🇺🇦</button>
+                <button class="lang-btn" data-lang="en">🇬🇧</button>
             </div>
         </div>
     </header>
@@ -148,6 +150,37 @@
 
     <footer class="footer">
         <div class="container">
+            <!-- Compact Timeline Navigation (Desktop only) -->
+            <div class="footer-timeline">
+                <div class="footer-timeline-track">
+                    <div class="footer-timeline-progress" id="footerProgress"></div>
+                    <div class="footer-timeline-marker" data-month="1" title="Січень: Великий вибух">
+                        <span class="marker-label">Січ</span>
+                    </div>
+                    <div class="footer-timeline-marker" data-month="3" title="Березень: Перші зірки">
+                        <span class="marker-label">Бер</span>
+                    </div>
+                    <div class="footer-timeline-marker" data-month="5" title="Травень: Перші галактики">
+                        <span class="marker-label">Тра</span>
+                    </div>
+                    <div class="footer-timeline-marker" data-month="9" title="Вересень: Сонячна система">
+                        <span class="marker-label">Вер</span>
+                    </div>
+                    <div class="footer-timeline-marker" data-month="10" title="Жовтень: Земля">
+                        <span class="marker-label">Жов</span>
+                    </div>
+                    <div class="footer-timeline-marker" data-month="11" title="Листопад: Перше життя">
+                        <span class="marker-label">Лис</span>
+                    </div>
+                    <div class="footer-timeline-marker" data-month="12" title="Грудень: Складне життя">
+                        <span class="marker-label">Гру</span>
+                    </div>
+                    <div class="footer-timeline-indicator" id="timelineIndicator">
+                        <span class="indicator-pulse"></span>
+                    </div>
+                </div>
+            </div>
+
             <p>
                 Створено з ❤️ для популяризації науки |
                 Базується на концепції Карла Сагана

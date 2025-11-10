@@ -967,3 +967,15 @@ const CATEGORY_COLORS = {
     human: '#f59e0b',
     civilization: '#06b6d4'
 };
+
+// Category icons/images (emoji)
+const CATEGORY_ICONS = {
+    universe: '💥',      // Big Bang, universe events
+    galaxy: '🌌',        // Galaxies, cosmic structures
+    'solar-system': '🪐', // Solar system formation
+    earth: '🌍',         // Earth formation and geology
+    life: '🧬',          // Life, DNA, biology
+    extinction: '☄️',     // Extinction events, catastrophes
+    human: '🦴',         // Human evolution
+    civilization: '🏛️'   // Human civilization
+};

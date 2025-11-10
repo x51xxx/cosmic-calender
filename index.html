@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Інтерактивний Космічний календар - історія Всесвіту на шкалі одного року">
+    <title>Космічний Календар | Cosmic Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="title">
+                <span class="cosmic-icon">🌌</span>
+                Космічний Календар
+            </h1>
+            <p class="subtitle">13,8 мільярдів років історії Всесвіту на шкалі одного року</p>
+            <div class="language-switch">
+                <button class="lang-btn active" data-lang="uk">🇺🇦 Українська</button>
+                <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Timeline View -->
+            <section class="timeline-section">
+                <div class="timeline-header">
+                    <h2>Часова шкала</h2>
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="timeline">
+                            <span>📊</span> Шкала
+                        </button>
+                        <button class="view-btn" data-view="calendar">
+                            <span>📅</span> Календар
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <span>📋</span> Список
+                        </button>
+                    </div>
+                </div>
+
+                <div class="scale-info">
+                    <div class="scale-card">
+                        <div class="scale-value">1 рік</div>
+                        <div class="scale-label">= 13,8 млрд років</div>
+                    </div>
+                    <div class="scale-card">
+                        <div class="scale-value">1 місяць</div>
+                        <div class="scale-label">≈ 1,15 млрд років</div>
+                    </div>
+                    <div class="scale-card">
+                        <div class="scale-value">1 день</div>
+                        <div class="scale-label">≈ 37,8 млн років</div>
+                    </div>
+                    <div class="scale-card">
+                        <div class="scale-value">1 секунда</div>
+                        <div class="scale-label">≈ 438 років</div>
+                    </div>
+                </div>
+
+                <!-- Timeline Container -->
+                <div class="view-container active" id="timeline-view">
+                    <div class="timeline-wrapper">
+                        <div class="timeline" id="timeline"></div>
+                    </div>
+                </div>
+
+                <!-- Calendar View -->
+                <div class="view-container" id="calendar-view">
+                    <div class="calendar-controls">
+                        <button class="month-nav" id="prev-month">‹</button>
+                        <h3 class="current-month" id="current-month"></h3>
+                        <button class="month-nav" id="next-month">›</button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+
+                <!-- List View -->
+                <div class="view-container" id="list-view">
+                    <div class="events-list" id="events-list"></div>
+                </div>
+            </section>
+
+            <!-- Event Details Modal -->
+            <div class="modal" id="event-modal">
+                <div class="modal-content">
+                    <button class="modal-close" id="modal-close">&times;</button>
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modal-title"></h3>
+                        <div class="modal-date" id="modal-date"></div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-description" id="modal-description"></div>
+                        <div class="modal-meta">
+                            <div class="meta-item">
+                                <strong>Космічний час:</strong>
+                                <span id="modal-cosmic-time"></span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>Реальний час:</strong>
+                                <span id="modal-real-time"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <div class="info-card">
+                    <h3>Про Космічний календар</h3>
+                    <p>
+                        Космічний календар — це спосіб візуалізації величезної історії Всесвіту,
+                        стиснутої до масштабів одного календарного року. Цей метод допомагає зрозуміти
+                        масштаби космічного часу та місце людства в історії Всесвіту.
+                    </p>
+                    <p>
+                        Якщо уявити, що Великий вибух стався 1 січня о 00:00:00, то сьогодення —
+                        це 31 грудня о 23:59:59. Вся історія людської цивілізації займає лише
+                        останні 10 секунд року!
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Ключові моменти</h3>
+                    <ul class="key-moments">
+                        <li><strong>1 січня:</strong> Великий вибух</li>
+                        <li><strong>2 січня:</strong> Перші галактики</li>
+                        <li><strong>9 вересня:</strong> Формування Сонячної системи</li>
+                        <li><strong>14 вересня:</strong> Перше життя на Землі</li>
+                        <li><strong>17 грудня:</strong> Перші багатоклітинні організми</li>
+                        <li><strong>31 грудня, 23:59:46:</strong> Перші люди</li>
+                        <li><strong>31 грудня, 23:59:59:</strong> Сучасність</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>
+                Створено з ❤️ для популяризації науки |
+                Базується на концепції Карла Сагана
+            </p>
+            <p class="footer-links">
+                <a href="https://github.com/x51xxx/cosmic-calender" target="_blank">GitHub</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="cosmic-events.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

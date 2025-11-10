@@ -1,0 +1,19 @@
+{
+  "name": "cosmic-calendar",
+  "version": "1.0.0",
+  "description": "Інтерактивний Космічний календар - візуалізація історії Всесвіту на шкалі одного року",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "cosmic-calendar",
+    "astronomy",
+    "visualization",
+    "universe",
+    "космос"
+  ],
+  "author": "",
+  "license": "MIT"
+}

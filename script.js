@@ -84,10 +84,10 @@ class CosmicCalendar {
         // Update static text
         if (this.currentLang === 'uk') {
             document.querySelector('.title').innerHTML = '<span class="cosmic-icon">🌌</span> Космічний Календар';
-            document.querySelector('.subtitle').textContent = '13,8 мільярдів років історії Всесвіту на шкалі одного року';
+            document.querySelector('.subtitle').textContent = '13,8 млрд років на шкалі одного року';
         } else {
             document.querySelector('.title').innerHTML = '<span class="cosmic-icon">🌌</span> Cosmic Calendar';
-            document.querySelector('.subtitle').textContent = '13.8 billion years of Universe history on the scale of one year';
+            document.querySelector('.subtitle').textContent = '13.8 billion years in one year scale';
         }
 
         // Update view buttons

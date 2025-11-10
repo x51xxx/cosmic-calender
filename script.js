@@ -159,11 +159,15 @@ class CosmicCalendar {
         const date = this.formatDate(event);
         const title = event.title[this.currentLang];
         const description = event.description[this.currentLang];
+        const icon = CATEGORY_ICONS[event.category] || '⭐';
 
         div.innerHTML = `
-            <div class="event-date">${date}</div>
-            <h3 class="event-title">${title}</h3>
-            <p class="event-description">${description}</p>
+            <div class="event-icon">${icon}</div>
+            <div class="event-content">
+                <div class="event-date">${date}</div>
+                <h3 class="event-title">${title}</h3>
+                <p class="event-description">${description}</p>
+            </div>
         `;
 
         div.addEventListener('click', () => this.showEventModal(event));
@@ -243,14 +247,18 @@ class CosmicCalendar {
         const date = this.formatDate(event);
         const title = event.title[this.currentLang];
         const description = event.description[this.currentLang];
+        const icon = CATEGORY_ICONS[event.category] || '⭐';
         const t = TRANSLATIONS[this.currentLang];
 
         div.innerHTML = `
-            <div class="event-date">${date}</div>
-            <h3 class="event-title">${title}</h3>
-            <p class="event-description">${description}</p>
-            <div style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">
-                ${this.formatYearsAgo(event.yearsAgo)}
+            <div class="event-icon">${icon}</div>
+            <div class="event-content">
+                <div class="event-date">${date}</div>
+                <h3 class="event-title">${title}</h3>
+                <p class="event-description">${description}</p>
+                <div style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">
+                    ${this.formatYearsAgo(event.yearsAgo)}
+                </div>
             </div>
         `;
 
@@ -370,6 +378,23 @@ document.addEventListener('DOMContentLoaded', () => {
     window.cosmicCalendar = new CosmicCalendar();
 });
 
+// Update footer timeline indicator based on scroll position
+function updateFooterTimeline() {
+    const indicator = document.getElementById('timelineIndicator');
+    const progress = document.getElementById('footerProgress');
+
+    if (!indicator || !progress) return;
+
+    // Calculate scroll percentage
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercentage = (scrollTop / scrollHeight) * 100;
+
+    // Update indicator position and progress bar
+    indicator.style.left = `${scrollPercentage}%`;
+    progress.style.width = `${scrollPercentage}%`;
+}
+
 // Add some visual effects on scroll (optimized with requestAnimationFrame)
 let ticking = false;
 window.addEventListener('scroll', () => {
@@ -382,8 +407,17 @@ window.addEventListener('scroll', () => {
                 const speed = (index + 1) * 0.5;
                 star.style.transform = `translateY(${scrolled * speed}px)`;
             });
+
+            // Update footer timeline
+            updateFooterTimeline();
+
             ticking = false;
         });
         ticking = true;
     }
+});
+
+// Initialize footer timeline on load
+window.addEventListener('load', () => {
+    updateFooterTimeline();
 });

@@ -68,19 +68,19 @@ body {
     }
 }
 
-/* Container */
+/* Container - Mobile First */
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem; /* Mobile: smaller padding */
 }
 
-/* Header */
+/* Header - Mobile First */
 .header {
     position: sticky;
     top: 0;
     z-index: 100;
-    padding: 1rem 0;
+    padding: 0.75rem 0; /* Mobile: compact */
     background: rgba(15, 15, 35, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
@@ -89,9 +89,10 @@ body {
 
 .header-container {
     display: flex;
+    flex-wrap: wrap; /* Mobile: wrap for small screens */
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem; /* Mobile: smaller gap */
 }
 
 .header-left {
@@ -101,7 +102,7 @@ body {
 
 .title {
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-size: 1.2rem; /* Mobile: fixed small size */
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
@@ -110,11 +111,11 @@ body {
     margin-bottom: 0.25rem;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem; /* Mobile: smaller gap */
 }
 
 .cosmic-icon {
-    font-size: 1.5rem;
+    font-size: 1.2rem; /* Mobile: smaller icon */
     display: inline-block;
     animation: rotate 20s linear infinite;
 }
@@ -129,7 +130,7 @@ body {
 }
 
 .subtitle {
-    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    font-size: 0.7rem; /* Mobile: small text */
     color: var(--text-secondary);
     margin: 0;
     opacity: 0.9;
@@ -142,6 +143,10 @@ body {
     padding: 0.25rem;
     border-radius: 0.75rem;
     border: 1px solid var(--border-color);
+    order: 3; /* Mobile: move to bottom */
+    width: 100%; /* Mobile: full width */
+    justify-content: center;
+    margin-top: 0.5rem;
 }
 
 .lang-btn {
@@ -158,6 +163,8 @@ body {
     justify-content: center;
     min-width: 44px;
     height: 40px;
+    flex: 1; /* Mobile: equal width buttons */
+    max-width: 60px; /* Mobile: limit width */
 }
 
 .lang-btn:hover {
@@ -170,9 +177,9 @@ body {
     box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
 }
 
-/* Main Content */
+/* Main Content - Mobile First */
 .main-content {
-    padding: 3rem 0;
+    padding: 2rem 0; /* Mobile: less padding */
     min-height: 60vh;
 }
 
@@ -183,10 +190,9 @@ body {
 
 .timeline-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Mobile: vertical stack */
+    align-items: flex-start; /* Mobile: left align */
     margin-bottom: 2rem;
-    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -203,6 +209,8 @@ body {
     padding: 0.5rem;
     border-radius: 2rem;
     border: 1px solid var(--border-color);
+    width: 100%; /* Mobile: full width */
+    justify-content: space-between; /* Mobile: spread buttons */
 }
 
 .view-btn {
@@ -229,19 +237,19 @@ body {
     color: var(--text-primary);
 }
 
-/* Scale Info */
+/* Scale Info - Mobile First */
 .scale-info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(2, 1fr); /* Mobile: 2 columns */
+    gap: 0.75rem; /* Mobile: smaller gap */
+    margin-bottom: 2rem; /* Mobile: less margin */
 }
 
 .scale-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: 0.75rem; /* Mobile: smaller radius */
+    padding: 1rem; /* Mobile: less padding */
     text-align: center;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
@@ -255,14 +263,14 @@ body {
 
 .scale-value {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem; /* Mobile: smaller */
     color: var(--accent-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem; /* Mobile: less margin */
 }
 
 .scale-label {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.75rem; /* Mobile: smaller */
 }
 
 /* View Containers */
@@ -286,26 +294,26 @@ body {
     }
 }
 
-/* Timeline */
+/* Timeline - Mobile First */
 .timeline-wrapper {
     position: relative;
     overflow-x: auto;
-    padding: 2rem 0;
+    padding: 1rem 0; /* Mobile: less padding */
 }
 
 .timeline {
     position: relative;
-    min-height: 600px;
-    padding: 2rem;
+    min-height: 400px; /* Mobile: shorter */
+    padding: 1rem; /* Mobile: less padding */
 }
 
 .timeline-event {
     position: relative;
-    padding: 1.5rem;
+    padding: 1rem; /* Mobile: less padding */
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    margin-bottom: 2rem;
+    border-radius: 0.75rem; /* Mobile: smaller radius */
+    margin-bottom: 1rem; /* Mobile: less margin */
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
@@ -314,49 +322,49 @@ body {
 .timeline-event::before {
     content: '';
     position: absolute;
-    left: -20px;
+    left: -12px; /* Mobile: closer */
     top: 50%;
-    width: 16px;
-    height: 16px;
+    width: 12px; /* Mobile: smaller */
+    height: 12px; /* Mobile: smaller */
     background: var(--primary-color);
     border-radius: 50%;
     transform: translateY(-50%);
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.8);
 }
 
 .timeline-event:hover {
-    transform: translateX(10px);
+    transform: translateX(5px); /* Mobile: less movement */
     border-color: var(--primary-color);
-    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
 }
 
 .event-date {
     font-family: 'Orbitron', sans-serif;
     color: var(--accent-color);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.75rem; /* Mobile: smaller */
+    margin-bottom: 0.25rem; /* Mobile: less margin */
 }
 
 .event-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem; /* Mobile: smaller */
+    margin-bottom: 0.25rem; /* Mobile: less margin */
     color: var(--text-primary);
 }
 
 .event-description {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Mobile: smaller */
 }
 
-/* Calendar View */
+/* Calendar View - Mobile First */
 .calendar-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Mobile: less margin */
     background: var(--card-bg);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
+    padding: 0.75rem 1rem; /* Mobile: less padding */
+    border-radius: 0.75rem; /* Mobile: smaller radius */
     border: 1px solid var(--border-color);
 }
 
@@ -364,9 +372,9 @@ body {
     background: var(--primary-color);
     border: none;
     color: var(--text-primary);
-    font-size: 1.5rem;
-    width: 40px;
-    height: 40px;
+    font-size: 1.25rem; /* Mobile: smaller */
+    width: 36px; /* Mobile: smaller */
+    height: 36px; /* Mobile: smaller */
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -379,22 +387,23 @@ body {
 
 .current-month {
     font-family: 'Orbitron', sans-serif;
+    font-size: 1rem; /* Mobile: smaller */
     color: var(--primary-color);
 }
 
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(4, 1fr); /* Mobile: 4 columns */
+    gap: 0.5rem; /* Mobile: smaller gap */
+    margin-top: 1rem; /* Mobile: less margin */
 }
 
 .calendar-day {
     aspect-ratio: 1;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 1rem;
+    border-radius: 0.375rem; /* Mobile: smaller radius */
+    padding: 0.5rem; /* Mobile: less padding */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -417,11 +426,11 @@ body {
 .calendar-day.has-event::after {
     content: '';
     position: absolute;
-    bottom: 5px;
+    bottom: 3px; /* Mobile: smaller position */
     left: 50%;
     transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
+    width: 4px; /* Mobile: smaller */
+    height: 4px; /* Mobile: smaller */
     background: var(--accent-color);
     border-radius: 50%;
     animation: pulse 2s infinite;
@@ -440,26 +449,26 @@ body {
 
 .day-number {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem; /* Mobile: smaller */
+    margin-bottom: 0.25rem; /* Mobile: less margin */
 }
 
 .day-name {
-    font-size: 0.7rem;
+    font-size: 0.65rem; /* Mobile: smaller */
     color: var(--text-secondary);
 }
 
-/* List View */
+/* List View - Mobile First */
 .events-list {
     display: grid;
-    gap: 1rem;
+    gap: 0.75rem; /* Mobile: smaller gap */
 }
 
 .list-event {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: 0.75rem; /* Mobile: smaller radius */
+    padding: 1rem; /* Mobile: less padding */
     cursor: pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
@@ -467,11 +476,11 @@ body {
 
 .list-event:hover {
     border-color: var(--primary-color);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    transform: translateY(-3px); /* Mobile: less movement */
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
 }
 
-/* Modal */
+/* Modal - Mobile First */
 .modal {
     display: none;
     position: fixed;
@@ -494,10 +503,10 @@ body {
 .modal-content {
     background: var(--bg-darker);
     border: 2px solid var(--primary-color);
-    border-radius: 1.5rem;
+    border-radius: 1rem; /* Mobile: smaller radius */
     max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
+    width: 95%; /* Mobile: wider */
+    max-height: 85vh; /* Mobile: taller */
     overflow-y: auto;
     position: relative;
     animation: slideUp 0.3s ease;
@@ -516,14 +525,14 @@ body {
 
 .modal-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.75rem; /* Mobile: closer to edge */
+    right: 0.75rem; /* Mobile: closer to edge */
     background: var(--accent-color);
     border: none;
     color: var(--text-primary);
-    font-size: 2rem;
-    width: 40px;
-    height: 40px;
+    font-size: 1.5rem; /* Mobile: smaller */
+    width: 36px; /* Mobile: smaller */
+    height: 36px; /* Mobile: smaller */
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -536,41 +545,43 @@ body {
 }
 
 .modal-header {
-    padding: 2rem 3rem 1rem 2rem;
+    padding: 1.5rem 3rem 1rem 1.5rem; /* Mobile: less padding */
     border-bottom: 1px solid var(--border-color);
 }
 
 .modal-title {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem; /* Mobile: smaller */
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
 .modal-date {
     color: var(--accent-color);
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Mobile: smaller */
 }
 
 .modal-body {
-    padding: 2rem;
+    padding: 1.5rem; /* Mobile: less padding */
 }
 
 .modal-description {
-    line-height: 1.8;
-    margin-bottom: 2rem;
+    line-height: 1.6; /* Mobile: tighter line-height */
+    margin-bottom: 1.5rem; /* Mobile: less margin */
     color: var(--text-secondary);
+    font-size: 0.9rem; /* Mobile: smaller */
 }
 
 .modal-meta {
     background: var(--card-bg);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: 0.75rem; /* Mobile: smaller radius */
+    padding: 1rem; /* Mobile: less padding */
     border: 1px solid var(--border-color);
 }
 
 .meta-item {
     padding: 0.5rem 0;
+    font-size: 0.85rem; /* Mobile: smaller */
 }
 
 .meta-item:not(:last-child) {
@@ -579,34 +590,38 @@ body {
 
 .meta-item strong {
     color: var(--primary-color);
+    display: block; /* Mobile: stack labels */
+    margin-bottom: 0.25rem; /* Mobile: spacing */
 }
 
-/* Info Section */
+/* Info Section - Mobile First */
 .info-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 4rem;
+    grid-template-columns: 1fr; /* Mobile: single column */
+    gap: 1.5rem; /* Mobile: smaller gap */
+    margin-top: 3rem; /* Mobile: less margin */
 }
 
 .info-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 2rem;
+    border-radius: 0.75rem; /* Mobile: smaller radius */
+    padding: 1.5rem; /* Mobile: less padding */
     backdrop-filter: blur(10px);
 }
 
 .info-card h3 {
     font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem; /* Mobile: smaller */
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem; /* Mobile: less margin */
 }
 
 .info-card p {
     color: var(--text-secondary);
-    margin-bottom: 1rem;
-    line-height: 1.8;
+    font-size: 0.9rem; /* Mobile: smaller */
+    margin-bottom: 0.75rem; /* Mobile: less margin */
+    line-height: 1.6; /* Mobile: tighter */
 }
 
 .key-moments {
@@ -615,6 +630,7 @@ body {
 
 .key-moments li {
     padding: 0.5rem 0;
+    font-size: 0.85rem; /* Mobile: smaller */
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-color);
 }
@@ -651,75 +667,260 @@ body {
     color: var(--accent-color);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Desktop Breakpoints */
+
+/* Tablet and up (768px+) */
+@media (min-width: 768px) {
     .container {
-        padding: 0 1rem;
+        padding: 0 2rem; /* Tablet: more padding */
     }
 
     .header {
-        padding: 0.75rem 0;
+        padding: 1rem 0; /* Tablet: more padding */
     }
 
     .header-container {
-        gap: 1rem;
-        flex-wrap: wrap;
+        flex-wrap: nowrap; /* Tablet: no wrap */
+        gap: 1.5rem; /* Tablet: larger gap */
     }
 
     .title {
-        font-size: 1.2rem;
-        gap: 0.3rem;
-    }
-
-    .cosmic-icon {
-        font-size: 1.2rem;
-    }
-
-    .subtitle {
-        font-size: 0.7rem;
-    }
-
-    .language-switch {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        margin-top: 0.5rem;
-    }
-
-    .lang-btn {
-        flex: 1;
-        max-width: 60px;
-    }
-
-    .timeline-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .view-controls {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .view-btn span {
-        display: none;
-    }
-
-    .calendar-grid {
-        grid-template-columns: repeat(4, 1fr);
+        font-size: 2rem; /* Tablet: larger */
         gap: 0.5rem;
     }
 
-    .scale-info {
-        grid-template-columns: repeat(2, 1fr);
+    .cosmic-icon {
+        font-size: 2rem; /* Tablet: larger */
     }
 
-    .info-section {
-        grid-template-columns: 1fr;
+    .subtitle {
+        font-size: 0.9rem; /* Tablet: larger */
+    }
+
+    .language-switch {
+        order: 0; /* Tablet: back to normal order */
+        width: auto; /* Tablet: auto width */
+        margin-top: 0; /* Tablet: no top margin */
+    }
+
+    .lang-btn {
+        flex: 0; /* Tablet: fixed size */
+        max-width: none; /* Tablet: no max width */
+    }
+
+    .main-content {
+        padding: 3rem 0; /* Tablet: more padding */
+    }
+
+    .timeline-header {
+        flex-direction: row; /* Tablet: horizontal */
+        align-items: center; /* Tablet: center align */
+        justify-content: space-between;
+    }
+
+    .timeline-header h2 {
+        font-size: 2.5rem; /* Tablet: larger */
+    }
+
+    .view-controls {
+        width: auto; /* Tablet: auto width */
+    }
+
+    .view-btn span {
+        display: inline; /* Tablet: show icons */
+    }
+
+    .scale-info {
+        grid-template-columns: repeat(4, 1fr); /* Tablet: 4 columns */
+        gap: 1rem; /* Tablet: larger gap */
+        margin-bottom: 3rem; /* Tablet: more margin */
+    }
+
+    .scale-card {
+        padding: 1.5rem; /* Tablet: more padding */
+        border-radius: 1rem; /* Tablet: larger radius */
+    }
+
+    .scale-value {
+        font-size: 1.5rem; /* Tablet: larger */
+        margin-bottom: 0.5rem;
+    }
+
+    .scale-label {
+        font-size: 0.9rem; /* Tablet: larger */
+    }
+
+    .timeline-wrapper {
+        padding: 2rem 0; /* Tablet: more padding */
+    }
+
+    .timeline {
+        min-height: 600px; /* Tablet: taller */
+        padding: 2rem; /* Tablet: more padding */
+    }
+
+    .timeline-event {
+        padding: 1.5rem; /* Tablet: more padding */
+        border-radius: 1rem; /* Tablet: larger radius */
+        margin-bottom: 2rem; /* Tablet: more margin */
+    }
+
+    .timeline-event::before {
+        left: -20px; /* Tablet: further */
+        width: 16px; /* Tablet: larger */
+        height: 16px; /* Tablet: larger */
+    }
+
+    .timeline-event:hover {
+        transform: translateX(10px); /* Tablet: more movement */
+        box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+    }
+
+    .event-date {
+        font-size: 0.9rem; /* Tablet: larger */
+        margin-bottom: 0.5rem;
+    }
+
+    .event-title {
+        font-size: 1.2rem; /* Tablet: larger */
+        margin-bottom: 0.5rem;
+    }
+
+    .event-description {
+        font-size: 0.9rem; /* Tablet: larger */
+    }
+
+    .calendar-controls {
+        padding: 1rem 2rem; /* Tablet: more padding */
+        margin-bottom: 2rem; /* Tablet: more margin */
+        border-radius: 1rem; /* Tablet: larger radius */
+    }
+
+    .month-nav {
+        font-size: 1.5rem; /* Tablet: larger */
+        width: 40px; /* Tablet: larger */
+        height: 40px; /* Tablet: larger */
+    }
+
+    .current-month {
+        font-size: 1.5rem; /* Tablet: larger */
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(7, 1fr); /* Tablet: 7 columns */
+        gap: 1rem; /* Tablet: larger gap */
+        margin-top: 2rem; /* Tablet: more margin */
+    }
+
+    .calendar-day {
+        padding: 1rem; /* Tablet: more padding */
+        border-radius: 0.5rem; /* Tablet: larger radius */
+    }
+
+    .calendar-day.has-event::after {
+        bottom: 5px; /* Tablet: larger position */
+        width: 6px; /* Tablet: larger */
+        height: 6px; /* Tablet: larger */
+    }
+
+    .day-number {
+        font-size: 1.2rem; /* Tablet: larger */
+        margin-bottom: 0.5rem;
+    }
+
+    .day-name {
+        font-size: 0.7rem; /* Tablet: larger */
+    }
+
+    .events-list {
+        gap: 1rem; /* Tablet: larger gap */
+    }
+
+    .list-event {
+        padding: 1.5rem; /* Tablet: more padding */
+        border-radius: 1rem; /* Tablet: larger radius */
+    }
+
+    .list-event:hover {
+        transform: translateY(-5px); /* Tablet: more movement */
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
     }
 
     .modal-content {
-        width: 95%;
+        width: 90%; /* Tablet: narrower */
+        max-height: 80vh; /* Tablet: shorter */
+        border-radius: 1.5rem; /* Tablet: larger radius */
+    }
+
+    .modal-close {
+        top: 1rem; /* Tablet: further from edge */
+        right: 1rem; /* Tablet: further from edge */
+        font-size: 2rem; /* Tablet: larger */
+        width: 40px; /* Tablet: larger */
+        height: 40px; /* Tablet: larger */
+    }
+
+    .modal-header {
+        padding: 2rem 3rem 1rem 2rem; /* Tablet: more padding */
+    }
+
+    .modal-title {
+        font-size: 1.5rem; /* Tablet: larger */
+    }
+
+    .modal-date {
+        font-size: 0.9rem; /* Tablet: larger */
+    }
+
+    .modal-body {
+        padding: 2rem; /* Tablet: more padding */
+    }
+
+    .modal-description {
+        line-height: 1.8; /* Tablet: more spacing */
+        margin-bottom: 2rem; /* Tablet: more margin */
+        font-size: 1rem; /* Tablet: larger */
+    }
+
+    .modal-meta {
+        padding: 1.5rem; /* Tablet: more padding */
+        border-radius: 1rem; /* Tablet: larger radius */
+    }
+
+    .meta-item {
+        font-size: 1rem; /* Tablet: larger */
+    }
+
+    .meta-item strong {
+        display: inline; /* Tablet: inline labels */
+        margin-bottom: 0; /* Tablet: no margin */
+        margin-right: 0.5rem; /* Tablet: right margin */
+    }
+
+    .info-section {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Tablet: auto columns */
+        gap: 2rem; /* Tablet: larger gap */
+        margin-top: 4rem; /* Tablet: more margin */
+    }
+
+    .info-card {
+        padding: 2rem; /* Tablet: more padding */
+        border-radius: 1rem; /* Tablet: larger radius */
+    }
+
+    .info-card h3 {
+        font-size: 1.5rem; /* Tablet: larger */
+        margin-bottom: 1rem; /* Tablet: more margin */
+    }
+
+    .info-card p {
+        font-size: 1rem; /* Tablet: larger */
+        margin-bottom: 1rem; /* Tablet: more margin */
+        line-height: 1.8; /* Tablet: more spacing */
+    }
+
+    .key-moments li {
+        font-size: 1rem; /* Tablet: larger */
     }
 }
 

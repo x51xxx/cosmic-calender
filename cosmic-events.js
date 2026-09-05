@@ -898,14 +898,68 @@ const COSMIC_EVENTS = [
     }
 ];
 
-// Month names in different languages
+// ---------------------------------------------------------------------------
+// Categories: colours, gradients and vector icon ids (see the SVG sprite)
+// ---------------------------------------------------------------------------
+const CATEGORY_ORDER = [
+    'universe', 'galaxy', 'solar-system', 'earth',
+    'life', 'extinction', 'human', 'civilization'
+];
+
+const CATEGORY_COLORS = {
+    universe: '#818cf8',
+    galaxy: '#a78bfa',
+    'solar-system': '#f472b6',
+    earth: '#34d399',
+    life: '#2dd4bf',
+    extinction: '#fb7185',
+    human: '#fbbf24',
+    civilization: '#22d3ee'
+};
+
+// Second stop of the per-category gradient used by cards, dots and badges
+const CATEGORY_COLORS_ALT = {
+    universe: '#c7d2fe',
+    galaxy: '#e9d5ff',
+    'solar-system': '#fbcfe8',
+    earth: '#a7f3d0',
+    life: '#99f6e4',
+    extinction: '#fecdd3',
+    human: '#fde68a',
+    civilization: '#a5f3fc'
+};
+
+// Vector icons live in the SVG sprite at the top of index.html
+const CATEGORY_ICONS = {
+    universe: 'i-universe',
+    galaxy: 'i-galaxy',
+    'solar-system': 'i-solar',
+    earth: 'i-earth',
+    life: 'i-life',
+    extinction: 'i-extinction',
+    human: 'i-human',
+    civilization: 'i-civilization'
+};
+
+// ---------------------------------------------------------------------------
+// Localisation
+// ---------------------------------------------------------------------------
 const TRANSLATIONS = {
     uk: {
+        locale: 'uk-UA',
+        dir: 'ltr',
         months: [
             'Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень',
             'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'
         ],
-        daysShort: ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+        monthsGenitive: [
+            'січня', 'лютого', 'березня', 'квітня', 'травня', 'червня',
+            'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'
+        ],
+        monthsShort: [
+            'Січ', 'Лют', 'Бер', 'Кві', 'Тра', 'Чер',
+            'Лип', 'Сер', 'Вер', 'Жов', 'Лис', 'Гру'
+        ],
         categories: {
             universe: 'Всесвіт',
             galaxy: 'Галактика',
@@ -917,22 +971,124 @@ const TRANSLATIONS = {
             civilization: 'Цивілізація'
         },
         ui: {
+            // header
+            brand: 'Космічний Календар',
+            tagline: '13,8 млрд років на шкалі одного року',
+            langLabel: 'Мова інтерфейсу',
+
+            // hero
+            heroKicker: 'За мотивами Карла Сагана',
+            heroTitle: 'Уся історія Всесвіту —',
+            heroTitleAccent: 'за один рік',
+            heroLead: 'Стисніть 13,8 мільярда років до дванадцяти місяців. Великий вибух — 1 січня опівночі. Ви читаєте це 31 грудня, за мить до півночі.',
+            heroCta: 'Подорожувати',
+            heroCtaAlt: 'Як це працює',
+            heroDialLabel: 'Космічний рік',
+            heroDialValue: '31 грудня',
+            heroDialTime: '23:59:59',
+            heroBadgeUnit: 'млрд років історії',
+            scrollHint: 'Гортайте',
+
+            // scale
+            scaleTitle: 'Масштаб часу',
+            scaleYear: '1 рік',
+            scaleYearValue: '13,8 млрд років',
+            scaleMonth: '1 місяць',
+            scaleMonthValue: '≈ 1,15 млрд років',
+            scaleDay: '1 день',
+            scaleDayValue: '≈ 37,8 млн років',
+            scaleSecond: '1 секунда',
+            scaleSecondValue: '≈ 438 років',
+
+            // controls
+            exploreTitle: 'Дослідити',
+            exploreSubtitle: '49 подій від Великого вибуху до сьогодні',
+            viewsLabel: 'Режим перегляду',
             timeline: 'Шкала',
+            wheel: 'Коло',
             calendar: 'Календар',
             list: 'Список',
+            searchPlaceholder: 'Пошук події…',
+            searchLabel: 'Пошук подій',
+            filterAll: 'Усі',
+            filtersLabel: 'Категорії',
+            resultsOne: 'подія',
+            resultsFew: 'події',
+            resultsMany: 'подій',
+            noResults: 'Нічого не знайдено',
+            noResultsHint: 'Спробуйте інший запит або скиньте фільтри',
+            reset: 'Скинути фільтри',
+
+            // wheel
+            wheelYear: 'Рік',
+            wheelLastDay: '31 грудня',
+            wheelLastMinute: 'Остання хвилина',
+            wheelHint: 'Три кільця — це три масштаби. Що ближче до центру, то ближче до сьогодні. Натисніть на точку, щоб дізнатись більше.',
+            wheelNow: 'Ви тут',
+            wheelRingYear: 'Зовнішнє кільце — увесь рік',
+            wheelRingDay: 'Середнє — 31 грудня',
+            wheelRingMinute: 'Внутрішнє — остання хвилина',
+
+            // calendar
+            emptyMonth: 'Цього місяця Всесвіт просто розширювався: зорі народжувались і згасали, галактики повільно набирали форму.',
+            calendarHint: 'Дні з подіями підсвічені',
+            prevMonth: 'Попередній місяць',
+            nextMonth: 'Наступний місяць',
+            eventsOnDay: 'подій цього дня',
+
+            // modal
             cosmicTime: 'Космічний час',
             realTime: 'Реальний час',
+            category: 'Категорія',
+            progress: 'Пройдено космічного року',
+            prevEvent: 'Попередня подія',
+            nextEvent: 'Наступна подія',
+            close: 'Закрити',
             yearsAgo: 'років тому',
-            about: 'Про Космічний календар',
-            keyMoments: 'Ключові моменти'
-        }
+            present: 'Сьогодення',
+
+            // info
+            aboutTitle: 'Про Космічний календар',
+            aboutP1: 'Космічний календар — спосіб побачити історію Всесвіту, стиснуту до одного календарного року. Кожна секунда цього року дорівнює приблизно 438 рокам реального часу.',
+            aboutP2: 'Якщо Великий вибух стався 1 січня о 00:00:00, то зараз — 31 грудня, 23:59:59. Уся писемна історія людства вміщується в останні 14 секунд.',
+            stripStart: 'Великий вибух',
+            stripEnd: 'Сьогодні',
+            keyMomentsTitle: 'Ключові моменти',
+            legendTitle: 'Категорії подій',
+
+            // footer
+            footerMade: 'Створено для популяризації науки',
+            footerBased: 'За концепцією Карла Сагана',
+            footerProgress: 'Прогрес читання',
+            backToTop: 'Нагору'
+        },
+        keyMoments: [
+            { date: '1 січня', text: 'Великий вибух' },
+            { date: '22 січня', text: 'Перші галактики' },
+            { date: '2 вересня', text: 'Сонячна система' },
+            { date: '21 вересня', text: 'Перше життя' },
+            { date: '14 грудня', text: 'Кембрійський вибух' },
+            { date: '25 грудня', text: 'Динозаври' },
+            { date: '31 грудня, 23:52', text: 'Сучасні люди' },
+            { date: '31 грудня, 23:59:59', text: 'Ви тут' }
+        ]
     },
+
     en: {
+        locale: 'en-GB',
+        dir: 'ltr',
         months: [
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ],
-        daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        monthsGenitive: [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ],
+        monthsShort: [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ],
         categories: {
             universe: 'Universe',
             galaxy: 'Galaxy',
@@ -944,38 +1100,97 @@ const TRANSLATIONS = {
             civilization: 'Civilization'
         },
         ui: {
+            brand: 'Cosmic Calendar',
+            tagline: '13.8 billion years on a one-year scale',
+            langLabel: 'Interface language',
+
+            heroKicker: 'After Carl Sagan',
+            heroTitle: 'The whole history of the Universe —',
+            heroTitleAccent: 'in a single year',
+            heroLead: 'Compress 13.8 billion years into twelve months. The Big Bang happens on 1 January at midnight. You are reading this on 31 December, a heartbeat before the new year.',
+            heroCta: 'Start exploring',
+            heroCtaAlt: 'How it works',
+            heroDialLabel: 'Cosmic year',
+            heroDialValue: '31 December',
+            heroDialTime: '23:59:59',
+            heroBadgeUnit: 'billion years of history',
+            scrollHint: 'Scroll',
+
+            scaleTitle: 'Scale of time',
+            scaleYear: '1 year',
+            scaleYearValue: '13.8 billion years',
+            scaleMonth: '1 month',
+            scaleMonthValue: '≈ 1.15 billion years',
+            scaleDay: '1 day',
+            scaleDayValue: '≈ 37.8 million years',
+            scaleSecond: '1 second',
+            scaleSecondValue: '≈ 438 years',
+
+            exploreTitle: 'Explore',
+            exploreSubtitle: '49 events from the Big Bang to today',
+            viewsLabel: 'View mode',
             timeline: 'Timeline',
+            wheel: 'Wheel',
             calendar: 'Calendar',
             list: 'List',
-            cosmicTime: 'Cosmic Time',
-            realTime: 'Real Time',
+            searchPlaceholder: 'Search events…',
+            searchLabel: 'Search events',
+            filterAll: 'All',
+            filtersLabel: 'Categories',
+            resultsOne: 'event',
+            resultsFew: 'events',
+            resultsMany: 'events',
+            noResults: 'Nothing found',
+            noResultsHint: 'Try another query or clear the filters',
+            reset: 'Clear filters',
+
+            wheelYear: 'Year',
+            wheelLastDay: '31 December',
+            wheelLastMinute: 'Last minute',
+            wheelHint: 'Three rings, three scales. The closer to the centre, the closer to today. Click a dot to read more.',
+            wheelNow: 'You are here',
+            wheelRingYear: 'Outer ring — the whole year',
+            wheelRingDay: 'Middle — 31 December',
+            wheelRingMinute: 'Inner — the last minute',
+
+            emptyMonth: 'Nothing catalogued this month: the Universe simply kept expanding, stars were born and died, galaxies slowly took shape.',
+            calendarHint: 'Days with events are highlighted',
+            prevMonth: 'Previous month',
+            nextMonth: 'Next month',
+            eventsOnDay: 'events on this day',
+
+            cosmicTime: 'Cosmic time',
+            realTime: 'Real time',
+            category: 'Category',
+            progress: 'Of the cosmic year elapsed',
+            prevEvent: 'Previous event',
+            nextEvent: 'Next event',
+            close: 'Close',
             yearsAgo: 'years ago',
-            about: 'About Cosmic Calendar',
-            keyMoments: 'Key Moments'
-        }
+            present: 'Present day',
+
+            aboutTitle: 'About the Cosmic Calendar',
+            aboutP1: 'The Cosmic Calendar is a way to see the history of the Universe compressed into one calendar year. Every second of that year equals roughly 438 years of real time.',
+            aboutP2: 'If the Big Bang happened on 1 January at 00:00:00, then right now is 31 December, 23:59:59. All of recorded human history fits into the last 14 seconds.',
+            stripStart: 'Big Bang',
+            stripEnd: 'Today',
+            keyMomentsTitle: 'Key moments',
+            legendTitle: 'Event categories',
+
+            footerMade: 'Built to make science contagious',
+            footerBased: 'Based on Carl Sagan’s concept',
+            footerProgress: 'Reading progress',
+            backToTop: 'Back to top'
+        },
+        keyMoments: [
+            { date: '1 January', text: 'Big Bang' },
+            { date: '22 January', text: 'First galaxies' },
+            { date: '2 September', text: 'Solar System' },
+            { date: '21 September', text: 'First life' },
+            { date: '14 December', text: 'Cambrian explosion' },
+            { date: '25 December', text: 'Dinosaurs' },
+            { date: '31 December, 23:52', text: 'Modern humans' },
+            { date: '31 December, 23:59:59', text: 'You are here' }
+        ]
     }
-};
-
-// Category colors
-const CATEGORY_COLORS = {
-    universe: '#6366f1',
-    galaxy: '#8b5cf6',
-    'solar-system': '#ec4899',
-    earth: '#10b981',
-    life: '#14b8a6',
-    extinction: '#ef4444',
-    human: '#f59e0b',
-    civilization: '#06b6d4'
-};
-
-// Category icons/images (emoji)
-const CATEGORY_ICONS = {
-    universe: '💥',      // Big Bang, universe events
-    galaxy: '🌌',        // Galaxies, cosmic structures
-    'solar-system': '🪐', // Solar system formation
-    earth: '🌍',         // Earth formation and geology
-    life: '🧬',          // Life, DNA, biology
-    extinction: '☄️',     // Extinction events, catastrophes
-    human: '🦴',         // Human evolution
-    civilization: '🏛️'   // Human civilization
 };

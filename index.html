@@ -3,195 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Інтерактивний Космічний календар - історія Всесвіту на шкалі одного року">
+    <meta name="description" content="Інтерактивний Космічний календар — 13,8 млрд років історії Всесвіту на шкалі одного року. Анімована векторна візуалізація за концепцією Карла Сагана.">
+    <meta name="theme-color" content="#080a1a">
+    <meta property="og:title" content="Космічний Календар | Cosmic Calendar">
+    <meta property="og:description" content="13,8 млрд років історії Всесвіту, стиснуті до одного року.">
+    <meta property="og:type" content="website">
     <title>Космічний Календар | Cosmic Calendar</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23fff'/%3E%3Cstop offset='.5' stop-color='%23a78bfa'/%3E%3Cstop offset='1' stop-color='%236366f1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23080a1a'/%3E%3Cellipse cx='16' cy='16' rx='4' ry='3.4' fill='url(%23g)'/%3E%3Cg fill='none' stroke='%23a78bfa' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M19.4 14c4.2-2 8.4.9 7.7 5.4-.7 4.4-6 7.4-11.1 6.2'/%3E%3Cpath d='M12.6 18c-4.2 2-8.4-.9-7.7-5.4C5.6 8.2 10.9 5.2 16 6.4'/%3E%3C/g%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="stars2"></div>
-    <div class="stars3"></div>
 
-    <header class="header">
-        <div class="container header-container">
-            <div class="header-left">
-                <h1 class="title">
-                    <span class="cosmic-icon">🌌</span>
-                    Космічний Календар
+<!-- ==================================================================== -->
+<!-- Vector icon sprite                                                    -->
+<!-- ==================================================================== -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Category icons -->
+    <symbol id="i-universe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3.4" fill="currentColor"/>
+      <circle cx="12" cy="12" r="7.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="2 3.2" opacity=".55"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+        <path d="M12 1.6v2.9M12 19.5v2.9M1.6 12h2.9M19.5 12h2.9"/>
+        <path d="M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1" opacity=".7"/>
+      </g>
+    </symbol>
+
+    <symbol id="i-galaxy" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="12" rx="2.7" ry="2.2" fill="currentColor" transform="rotate(-24 12 12)"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+        <path d="M14.5 10.4c3.6-1.7 7.2.6 6.6 4.4-.6 3.7-4.9 6.4-9.4 5.4"/>
+        <path d="M9.5 13.6c-3.6 1.7-7.2-.6-6.6-4.4C3.5 5.5 7.8 2.8 12.3 3.8"/>
+      </g>
+      <circle cx="18.6" cy="7.4" r=".9" fill="currentColor" opacity=".7"/>
+      <circle cx="5.4" cy="16.6" r=".9" fill="currentColor" opacity=".7"/>
+    </symbol>
+
+    <symbol id="i-solar" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3.6" fill="currentColor"/>
+      <ellipse cx="12" cy="12" rx="9.4" ry="4.2" fill="none" stroke="currentColor" stroke-width="1.5" transform="rotate(-24 12 12)" opacity=".75"/>
+      <ellipse cx="12" cy="12" rx="6" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(-24 12 12)" opacity=".45"/>
+      <circle cx="20.4" cy="8.4" r="1.7" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-earth" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <ellipse cx="12" cy="12" rx="4.1" ry="9" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".6"/>
+      <path d="M3.4 9.4h17.2M3.4 14.6h17.2" fill="none" stroke="currentColor" stroke-width="1.3" opacity=".6"/>
+      <path d="M8.4 5.6c1.6 1 1 2.6 2.6 3s2-.9 3.2-.2.4 2.4 1.8 3.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-life" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="M8.2 2.8c0 4.6 7.6 4.6 7.6 9.2s-7.6 4.6-7.6 9.2"/>
+        <path d="M15.8 2.8c0 4.6-7.6 4.6-7.6 9.2s7.6 4.6 7.6 9.2"/>
+      </g>
+      <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".75">
+        <path d="M9.4 6.2h5.2M8.3 9.6h7.4M8.3 14.4h7.4M9.4 17.8h5.2"/>
+      </g>
+    </symbol>
+
+    <symbol id="i-extinction" viewBox="0 0 24 24">
+      <circle cx="16" cy="8" r="3.4" fill="currentColor"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
+        <path d="M13.1 10.9 3.4 20.6"/>
+        <path d="M12.4 6.6 7.8 11.2M17.4 11.6l-4.6 4.6" opacity=".5"/>
+      </g>
+      <circle cx="20.6" cy="3.6" r="1.1" fill="currentColor" opacity=".7"/>
+    </symbol>
+
+    <symbol id="i-human" viewBox="0 0 24 24">
+      <circle cx="12" cy="4.4" r="2.6" fill="currentColor"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 8.2v6.1"/>
+        <path d="m12 14.3-3.1 6.5M12 14.3l3.1 6.5"/>
+        <path d="M7.2 10.6 12 9l4.8 1.6"/>
+      </g>
+    </symbol>
+
+    <symbol id="i-civilization" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.6 8.6 12 3.2l9.4 5.4"/>
+        <path d="M3.6 20.4h16.8"/>
+        <path d="M6.2 20.4v-9.2M10.1 20.4v-9.2M13.9 20.4v-9.2M17.8 20.4v-9.2"/>
+        <path d="M4 11.2h16"/>
+      </g>
+    </symbol>
+
+    <!-- UI icons -->
+    <symbol id="i-view-timeline" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <path d="M4 4v16"/><path d="M8 7h11M8 12h7M8 17h9"/>
+      </g>
+      <g fill="currentColor"><circle cx="4" cy="7" r="1.9"/><circle cx="4" cy="12" r="1.9"/><circle cx="4" cy="17" r="1.9"/></g>
+    </symbol>
+    <symbol id="i-view-wheel" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7">
+        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>
+      </g>
+      <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+      <circle cx="12" cy="3" r="1.7" fill="currentColor"/>
+      <circle cx="17" cy="12" r="1.3" fill="currentColor" opacity=".7"/>
+    </symbol>
+    <symbol id="i-view-calendar" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+        <rect x="3" y="5" width="18" height="16" rx="3"/>
+        <path d="M3 10h18M8 2.8v3.6M16 2.8v3.6"/>
+      </g>
+      <g fill="currentColor"><circle cx="8" cy="14" r="1.2"/><circle cx="12" cy="14" r="1.2"/><circle cx="16" cy="17.5" r="1.2"/></g>
+    </symbol>
+    <symbol id="i-view-list" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/></g>
+      <g fill="currentColor"><circle cx="4.5" cy="6" r="1.7"/><circle cx="4.5" cy="12" r="1.7"/><circle cx="4.5" cy="18" r="1.7"/></g>
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.4 15.4 4.6 4.6"/></g>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/></g>
+    </symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24">
+      <path d="M14.5 5 8 12l6.5 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24">
+      <path d="M9.5 5 16 12l-6.5 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5v15M5.5 13 12 19.5 18.5 13"/></g>
+    </symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19.5v-15M5.5 11 12 4.5 18.5 11"/></g>
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3.3 9.5h17.4M3.3 14.5h17.4"/></g>
+    </symbol>
+    <symbol id="i-github" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z"/>
+    </symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2.2c.6 4.6 2.6 6.6 7.2 7.2-4.6.6-6.6 2.6-7.2 7.2-.6-4.6-2.6-6.6-7.2-7.2 4.6-.6 6.6-2.6 7.2-7.2Z"/>
+      <path fill="currentColor" opacity=".65" d="M18.6 14.4c.3 2.4 1.3 3.4 3.7 3.7-2.4.3-3.4 1.3-3.7 3.7-.3-2.4-1.3-3.4-3.7-3.7 2.4-.3 3.4-1.3 3.7-3.7Z"/>
+    </symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3.5 6.5h17M6.5 12h11M10 17.5h4"/></g>
+    </symbol>
+  </defs>
+</svg>
+
+<canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
+<div class="nebula" aria-hidden="true">
+    <span class="nebula-blob nebula-blob--1"></span>
+    <span class="nebula-blob nebula-blob--2"></span>
+    <span class="nebula-blob nebula-blob--3"></span>
+</div>
+<div class="grid-overlay" aria-hidden="true"></div>
+
+<a class="skip-link" href="#explore">Перейти до подій</a>
+<div class="read-progress"><span id="read-progress-bar"></span></div>
+
+<!-- ==================================================================== -->
+<!-- Header                                                                -->
+<!-- ==================================================================== -->
+<header class="header" id="header">
+    <div class="container header-inner">
+        <a class="brand" href="#top">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 44 44">
+                    <defs>
+                        <radialGradient id="brandCore" cx="50%" cy="50%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="45%" stop-color="#c7d2fe"/>
+                            <stop offset="100%" stop-color="#6366f1"/>
+                        </radialGradient>
+                        <linearGradient id="brandArm" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#a78bfa"/>
+                            <stop offset="100%" stop-color="#ec4899"/>
+                        </linearGradient>
+                    </defs>
+                    <g class="brand-spin">
+                        <path d="M27 18.5c6-2.8 11.9 1.3 11 7.6-.9 6.3-8.5 10.5-15.7 8.8" fill="none" stroke="url(#brandArm)" stroke-width="2.6" stroke-linecap="round"/>
+                        <path d="M17 25.5c-6 2.8-11.9-1.3-11-7.6C6.9 11.6 14.5 7.4 21.7 9.1" fill="none" stroke="url(#brandArm)" stroke-width="2.6" stroke-linecap="round"/>
+                    </g>
+                    <ellipse cx="22" cy="22" rx="5.4" ry="4.4" fill="url(#brandCore)" transform="rotate(-24 22 22)" class="brand-core"/>
+                </svg>
+            </span>
+            <span class="brand-text">
+                <strong class="brand-title" data-i18n="ui.brand">Космічний Календар</strong>
+                <span class="brand-tagline" data-i18n="ui.tagline">13,8 млрд років на шкалі одного року</span>
+            </span>
+        </a>
+
+        <div class="lang-switch" role="group" data-i18n-aria="ui.langLabel" aria-label="Мова інтерфейсу">
+            <svg class="icon lang-globe" aria-hidden="true"><use href="#i-globe"/></svg>
+            <button class="lang-btn is-active" data-lang="uk" type="button"><span>UA</span></button>
+            <button class="lang-btn" data-lang="en" type="button"><span>EN</span></button>
+            <span class="lang-thumb" aria-hidden="true"></span>
+        </div>
+    </div>
+</header>
+
+<main id="top">
+
+    <!-- ================================================================ -->
+    <!-- Hero                                                              -->
+    <!-- ================================================================ -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-copy">
+                <p class="hero-kicker reveal">
+                    <svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+                    <span data-i18n="ui.heroKicker">За мотивами Карла Сагана</span>
+                </p>
+                <h1 class="hero-title reveal" style="--delay:.06s">
+                    <span data-i18n="ui.heroTitle">Уся історія Всесвіту —</span>
+                    <em class="gradient-text" data-i18n="ui.heroTitleAccent">за один рік</em>
                 </h1>
-                <p class="subtitle">13,8 млрд років на шкалі одного року</p>
+                <p class="hero-lead reveal" style="--delay:.12s" data-i18n="ui.heroLead">
+                    Стисніть 13,8 мільярда років до дванадцяти місяців. Великий вибух — 1 січня опівночі.
+                    Ви читаєте це 31 грудня, за мить до півночі.
+                </p>
+                <div class="hero-actions reveal" style="--delay:.18s">
+                    <a class="btn btn--primary" href="#explore">
+                        <span data-i18n="ui.heroCta">Подорожувати</span>
+                        <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg>
+                    </a>
+                    <a class="btn btn--ghost" href="#about" data-i18n="ui.heroCtaAlt">Як це працює</a>
+                </div>
             </div>
-            <div class="language-switch">
-                <button class="lang-btn active" data-lang="uk">🇺🇦</button>
-                <button class="lang-btn" data-lang="en">🇬🇧</button>
+
+            <div class="hero-dial reveal" style="--delay:.1s">
+                <svg viewBox="0 0 320 320" role="img" aria-labelledby="dialTitle">
+                    <title id="dialTitle" data-i18n="ui.heroDialLabel">Космічний рік</title>
+                    <defs>
+                        <linearGradient id="dialArc" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#6366f1"/>
+                            <stop offset="50%" stop-color="#a78bfa"/>
+                            <stop offset="100%" stop-color="#ec4899"/>
+                        </linearGradient>
+                        <radialGradient id="dialCore" cx="50%" cy="50%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="35%" stop-color="#fbcfe8"/>
+                            <stop offset="70%" stop-color="#a78bfa" stop-opacity=".55"/>
+                            <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+                        </radialGradient>
+                        <filter id="dialGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="5" result="b"/>
+                            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+
+                    <circle cx="160" cy="160" r="140" fill="none" stroke="rgba(148,163,255,.12)" stroke-width="1"/>
+                    <circle class="dial-minor" cx="160" cy="160" r="132" fill="none" stroke="rgba(167,139,250,.35)"
+                            stroke-width="7" stroke-dasharray="1.4 12.4" transform="rotate(-90 160 160)"/>
+                    <circle class="dial-major" cx="160" cy="160" r="124" fill="none" stroke="rgba(199,210,254,.55)"
+                            stroke-width="14" stroke-dasharray="2.6 66.5" transform="rotate(-90 160 160)"/>
+
+                    <circle cx="160" cy="160" r="104" fill="none" stroke="rgba(148,163,255,.14)" stroke-width="10"/>
+                    <circle class="dial-arc" cx="160" cy="160" r="104" fill="none" stroke="url(#dialArc)"
+                            stroke-width="10" stroke-linecap="round" transform="rotate(-90 160 160)"
+                            filter="url(#dialGlow)"/>
+
+                    <circle cx="160" cy="160" r="74" fill="url(#dialCore)" class="dial-core"/>
+
+                    <g class="dial-orbit">
+                        <circle cx="160" cy="56" r="7" fill="#fbcfe8" filter="url(#dialGlow)"/>
+                    </g>
+                    <g class="dial-orbit dial-orbit--slow">
+                        <circle cx="264" cy="160" r="4" fill="#7dd3fc" opacity=".85"/>
+                    </g>
+
+                    <text x="160" y="150" class="dial-label" text-anchor="middle" data-i18n="ui.heroDialValue">31 грудня</text>
+                    <text x="160" y="192" class="dial-time" text-anchor="middle" data-i18n="ui.heroDialTime">23:59:59</text>
+                </svg>
+                <span class="hero-dial-badge">
+                    <b class="js-counter" data-target="13.8" data-decimals="1">0</b>
+                    <span data-i18n="ui.heroBadgeUnit">млрд років історії</span>
+                </span>
             </div>
         </div>
-    </header>
 
-    <main class="main-content">
+        <a class="scroll-hint" href="#explore" aria-hidden="true" tabindex="-1">
+            <span data-i18n="ui.scrollHint">Гортайте</span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg>
+        </a>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- Scale cards                                                       -->
+    <!-- ================================================================ -->
+    <section class="scale-section">
         <div class="container">
-            <!-- Timeline View -->
-            <section class="timeline-section">
-                <div class="timeline-header">
-                    <h2>Часова шкала</h2>
-                    <div class="view-controls">
-                        <button class="view-btn active" data-view="timeline">
-                            <span>📊</span> Шкала
-                        </button>
-                        <button class="view-btn" data-view="calendar">
-                            <span>📅</span> Календар
-                        </button>
-                        <button class="view-btn" data-view="list">
-                            <span>📋</span> Список
-                        </button>
+            <div class="scale-grid">
+                <article class="scale-card reveal">
+                    <span class="scale-card-glow" aria-hidden="true"></span>
+                    <div class="scale-value" data-i18n="ui.scaleYear">1 рік</div>
+                    <div class="scale-label" data-i18n="ui.scaleYearValue">13,8 млрд років</div>
+                </article>
+                <article class="scale-card reveal" style="--delay:.06s">
+                    <span class="scale-card-glow" aria-hidden="true"></span>
+                    <div class="scale-value" data-i18n="ui.scaleMonth">1 місяць</div>
+                    <div class="scale-label" data-i18n="ui.scaleMonthValue">≈ 1,15 млрд років</div>
+                </article>
+                <article class="scale-card reveal" style="--delay:.12s">
+                    <span class="scale-card-glow" aria-hidden="true"></span>
+                    <div class="scale-value" data-i18n="ui.scaleDay">1 день</div>
+                    <div class="scale-label" data-i18n="ui.scaleDayValue">≈ 37,8 млн років</div>
+                </article>
+                <article class="scale-card reveal" style="--delay:.18s">
+                    <span class="scale-card-glow" aria-hidden="true"></span>
+                    <div class="scale-value" data-i18n="ui.scaleSecond">1 секунда</div>
+                    <div class="scale-label" data-i18n="ui.scaleSecondValue">≈ 438 років</div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- Explorer                                                          -->
+    <!-- ================================================================ -->
+    <section class="explore" id="explore">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <h2 class="section-title" data-i18n="ui.exploreTitle">Дослідити</h2>
+                    <p class="section-sub" data-i18n="ui.exploreSubtitle">49 подій від Великого вибуху до сьогодні</p>
+                </div>
+                <div class="view-switch" role="tablist" data-i18n-aria="ui.viewsLabel" aria-label="Режим перегляду">
+                    <span class="view-switch-thumb" aria-hidden="true"></span>
+                    <button class="view-btn is-active" type="button" role="tab" aria-selected="true" data-view="timeline">
+                        <svg class="icon" aria-hidden="true"><use href="#i-view-timeline"/></svg>
+                        <span data-i18n="ui.timeline">Шкала</span>
+                    </button>
+                    <button class="view-btn" type="button" role="tab" aria-selected="false" data-view="wheel">
+                        <svg class="icon" aria-hidden="true"><use href="#i-view-wheel"/></svg>
+                        <span data-i18n="ui.wheel">Коло</span>
+                    </button>
+                    <button class="view-btn" type="button" role="tab" aria-selected="false" data-view="calendar">
+                        <svg class="icon" aria-hidden="true"><use href="#i-view-calendar"/></svg>
+                        <span data-i18n="ui.calendar">Календар</span>
+                    </button>
+                    <button class="view-btn" type="button" role="tab" aria-selected="false" data-view="list">
+                        <svg class="icon" aria-hidden="true"><use href="#i-view-list"/></svg>
+                        <span data-i18n="ui.list">Список</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="toolbar reveal" style="--delay:.06s">
+                <label class="search">
+                    <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+                    <input type="search" id="search" autocomplete="off"
+                           data-i18n-placeholder="ui.searchPlaceholder" data-i18n-aria="ui.searchLabel"
+                           placeholder="Пошук події…" aria-label="Пошук подій">
+                    <button class="search-clear" id="search-clear" type="button" hidden
+                            data-i18n-aria="ui.close" aria-label="Закрити">
+                        <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+                    </button>
+                </label>
+                <div class="chips" id="chips" data-i18n-aria="ui.filtersLabel" aria-label="Категорії" role="group"></div>
+                <p class="results" id="results" aria-live="polite"></p>
+            </div>
+
+            <div class="views">
+                <div class="view is-active" id="view-timeline" role="tabpanel">
+                    <div class="timeline" id="timeline">
+                        <span class="timeline-rail" aria-hidden="true"><i class="timeline-rail-fill" id="timeline-rail-fill"></i></span>
+                        <div class="timeline-items" id="timeline-items"></div>
                     </div>
                 </div>
 
-                <div class="scale-info">
-                    <div class="scale-card">
-                        <div class="scale-value">1 рік</div>
-                        <div class="scale-label">= 13,8 млрд років</div>
-                    </div>
-                    <div class="scale-card">
-                        <div class="scale-value">1 місяць</div>
-                        <div class="scale-label">≈ 1,15 млрд років</div>
-                    </div>
-                    <div class="scale-card">
-                        <div class="scale-value">1 день</div>
-                        <div class="scale-label">≈ 37,8 млн років</div>
-                    </div>
-                    <div class="scale-card">
-                        <div class="scale-value">1 секунда</div>
-                        <div class="scale-label">≈ 438 років</div>
-                    </div>
-                </div>
-
-                <!-- Timeline Container -->
-                <div class="view-container active" id="timeline-view">
-                    <div class="timeline-wrapper">
-                        <div class="timeline" id="timeline"></div>
-                    </div>
-                </div>
-
-                <!-- Calendar View -->
-                <div class="view-container" id="calendar-view">
-                    <div class="calendar-controls">
-                        <button class="month-nav" id="prev-month">‹</button>
-                        <h3 class="current-month" id="current-month"></h3>
-                        <button class="month-nav" id="next-month">›</button>
-                    </div>
-                    <div class="calendar-grid" id="calendar-grid"></div>
-                </div>
-
-                <!-- List View -->
-                <div class="view-container" id="list-view">
-                    <div class="events-list" id="events-list"></div>
-                </div>
-            </section>
-
-            <!-- Event Details Modal -->
-            <div class="modal" id="event-modal">
-                <div class="modal-content">
-                    <button class="modal-close" id="modal-close">&times;</button>
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="modal-title"></h3>
-                        <div class="modal-date" id="modal-date"></div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="modal-description" id="modal-description"></div>
-                        <div class="modal-meta">
-                            <div class="meta-item">
-                                <strong>Космічний час:</strong>
-                                <span id="modal-cosmic-time"></span>
-                            </div>
-                            <div class="meta-item">
-                                <strong>Реальний час:</strong>
-                                <span id="modal-real-time"></span>
-                            </div>
+                <div class="view" id="view-wheel" role="tabpanel">
+                    <div class="wheel-wrap">
+                        <div class="wheel-canvas" id="wheel"></div>
+                        <div class="wheel-side">
+                            <ul class="ring-key">
+                                <li><i class="ring-key-dot ring-key-dot--1" aria-hidden="true"></i><span data-i18n="ui.wheelRingYear"></span></li>
+                                <li><i class="ring-key-dot ring-key-dot--2" aria-hidden="true"></i><span data-i18n="ui.wheelRingDay"></span></li>
+                                <li><i class="ring-key-dot ring-key-dot--3" aria-hidden="true"></i><span data-i18n="ui.wheelRingMinute"></span></li>
+                            </ul>
+                            <p class="wheel-hint" data-i18n="ui.wheelHint">Що ближче до центру — то ближче до сьогодні.</p>
+                            <ul class="legend" id="legend"></ul>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Info Section -->
-            <section class="info-section">
-                <div class="info-card">
-                    <h3>Про Космічний календар</h3>
-                    <p>
-                        Космічний календар — це спосіб візуалізації величезної історії Всесвіту,
-                        стиснутої до масштабів одного календарного року. Цей метод допомагає зрозуміти
-                        масштаби космічного часу та місце людства в історії Всесвіту.
-                    </p>
-                    <p>
-                        Якщо уявити, що Великий вибух стався 1 січня о 00:00:00, то сьогодення —
-                        це 31 грудня о 23:59:59. Вся історія людської цивілізації займає лише
-                        останні 10 секунд року!
-                    </p>
+                <div class="view" id="view-calendar" role="tabpanel">
+                    <div class="calendar-bar">
+                        <button class="round-btn" id="prev-month" type="button" data-i18n-aria="ui.prevMonth" aria-label="Попередній місяць">
+                            <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+                        </button>
+                        <div class="calendar-bar-center">
+                            <h3 class="calendar-month" id="calendar-month"></h3>
+                            <div class="month-dots" id="month-dots"></div>
+                        </div>
+                        <button class="round-btn" id="next-month" type="button" data-i18n-aria="ui.nextMonth" aria-label="Наступний місяць">
+                            <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+                        </button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                    <div class="calendar-empty" id="calendar-empty" hidden>
+                        <svg class="icon icon--xl" aria-hidden="true"><use href="#i-galaxy"/></svg>
+                        <p data-i18n="ui.emptyMonth"></p>
+                    </div>
                 </div>
 
-                <div class="info-card">
-                    <h3>Ключові моменти</h3>
-                    <ul class="key-moments">
-                        <li><strong>1 січня:</strong> Великий вибух</li>
-                        <li><strong>2 січня:</strong> Перші галактики</li>
-                        <li><strong>9 вересня:</strong> Формування Сонячної системи</li>
-                        <li><strong>14 вересня:</strong> Перше життя на Землі</li>
-                        <li><strong>17 грудня:</strong> Перші багатоклітинні організми</li>
-                        <li><strong>31 грудня, 23:59:46:</strong> Перші люди</li>
-                        <li><strong>31 грудня, 23:59:59:</strong> Сучасність</li>
-                    </ul>
+                <div class="view" id="view-list" role="tabpanel">
+                    <div class="list" id="list"></div>
                 </div>
-            </section>
-        </div>
-    </main>
 
-    <footer class="footer">
-        <div class="container">
-            <!-- Compact Timeline Navigation (Desktop only) -->
-            <div class="footer-timeline">
-                <div class="footer-timeline-track">
-                    <div class="footer-timeline-progress" id="footerProgress"></div>
-                    <div class="footer-timeline-marker" data-month="1" title="Січень: Великий вибух">
-                        <span class="marker-label">Січ</span>
-                    </div>
-                    <div class="footer-timeline-marker" data-month="3" title="Березень: Перші зірки">
-                        <span class="marker-label">Бер</span>
-                    </div>
-                    <div class="footer-timeline-marker" data-month="5" title="Травень: Перші галактики">
-                        <span class="marker-label">Тра</span>
-                    </div>
-                    <div class="footer-timeline-marker" data-month="9" title="Вересень: Сонячна система">
-                        <span class="marker-label">Вер</span>
-                    </div>
-                    <div class="footer-timeline-marker" data-month="10" title="Жовтень: Земля">
-                        <span class="marker-label">Жов</span>
-                    </div>
-                    <div class="footer-timeline-marker" data-month="11" title="Листопад: Перше життя">
-                        <span class="marker-label">Лис</span>
-                    </div>
-                    <div class="footer-timeline-marker" data-month="12" title="Грудень: Складне життя">
-                        <span class="marker-label">Гру</span>
-                    </div>
-                    <div class="footer-timeline-indicator" id="timelineIndicator">
-                        <span class="indicator-pulse"></span>
-                    </div>
+                <div class="empty-state" id="empty-state" hidden>
+                    <svg class="icon icon--xl" aria-hidden="true"><use href="#i-search"/></svg>
+                    <h3 data-i18n="ui.noResults">Нічого не знайдено</h3>
+                    <p data-i18n="ui.noResultsHint">Спробуйте інший запит або скиньте фільтри</p>
+                    <button class="btn btn--ghost" id="reset-filters" type="button" data-i18n="ui.reset">Скинути фільтри</button>
                 </div>
             </div>
-
-            <p>
-                Створено з ❤️ для популяризації науки |
-                Базується на концепції Карла Сагана
-            </p>
-            <p class="footer-links">
-                <a href="https://github.com/x51xxx/cosmic-calender" target="_blank">GitHub</a>
-            </p>
         </div>
-    </footer>
+    </section>
 
-    <script src="cosmic-events.js"></script>
-    <script src="script.js"></script>
+    <!-- ================================================================ -->
+    <!-- Info                                                              -->
+    <!-- ================================================================ -->
+    <section class="info" id="about">
+        <div class="container info-grid">
+            <article class="info-card reveal">
+                <h3 data-i18n="ui.aboutTitle">Про Космічний календар</h3>
+                <p data-i18n="ui.aboutP1"></p>
+                <p data-i18n="ui.aboutP2"></p>
+                <div class="info-strip" aria-hidden="true">
+                    <svg viewBox="0 0 600 90" preserveAspectRatio="none" class="info-strip-svg">
+                        <defs>
+                            <linearGradient id="stripGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#6366f1"/>
+                                <stop offset="45%" stop-color="#a78bfa"/>
+                                <stop offset="75%" stop-color="#2dd4bf"/>
+                                <stop offset="100%" stop-color="#ec4899"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="info-strip-path" d="M0 70 C 90 70 110 40 170 38 C 240 36 260 60 320 52 C 380 44 400 20 460 18 C 520 16 560 34 600 20"
+                              fill="none" stroke="url(#stripGrad)" stroke-width="3" stroke-linecap="round"/>
+                        <g class="info-strip-dots" fill="#fff">
+                            <circle cx="8" cy="70" r="3.4"/><circle cx="170" cy="38" r="3.4"/>
+                            <circle cx="320" cy="52" r="3.4"/><circle cx="460" cy="18" r="3.4"/>
+                            <circle cx="596" cy="20" r="4.6"/>
+                        </g>
+                    </svg>
+                    <p class="info-strip-caption" aria-hidden="true">
+                        <span data-i18n="ui.stripStart"></span>
+                        <span data-i18n="ui.stripEnd"></span>
+                    </p>
+                </div>
+            </article>
+
+            <article class="info-card reveal" style="--delay:.08s">
+                <h3 data-i18n="ui.keyMomentsTitle">Ключові моменти</h3>
+                <ol class="key-moments" id="key-moments"></ol>
+            </article>
+        </div>
+    </section>
+</main>
+
+<!-- ==================================================================== -->
+<!-- Footer                                                                -->
+<!-- ==================================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-timeline" aria-hidden="true">
+            <div class="footer-track">
+                <span class="footer-fill" id="footer-fill"></span>
+                <span class="footer-thumb" id="footer-thumb"><i></i></span>
+            </div>
+            <div class="footer-months" id="footer-months"></div>
+        </div>
+        <p class="footer-note">
+            <span data-i18n="ui.footerMade">Створено для популяризації науки</span>
+            <span class="dot" aria-hidden="true">•</span>
+            <span data-i18n="ui.footerBased">За концепцією Карла Сагана</span>
+        </p>
+        <p class="footer-links">
+            <a href="https://github.com/x51xxx/cosmic-calender" target="_blank" rel="noopener">
+                <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub
+            </a>
+        </p>
+    </div>
+</footer>
+
+<button class="to-top" id="to-top" type="button" data-i18n-aria="ui.backToTop" aria-label="Нагору">
+    <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+</button>
+
+<!-- ==================================================================== -->
+<!-- Modal                                                                 -->
+<!-- ==================================================================== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="document">
+        <button class="modal-close" id="modal-close" type="button" data-i18n-aria="ui.close" aria-label="Закрити">
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+
+        <div class="modal-art" id="modal-art">
+            <svg viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                    <radialGradient id="artGlow" cx="50%" cy="55%">
+                        <stop offset="0%" stop-color="var(--cat)" stop-opacity=".85"/>
+                        <stop offset="60%" stop-color="var(--cat)" stop-opacity=".18"/>
+                        <stop offset="100%" stop-color="var(--cat)" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+                <rect width="400" height="160" fill="url(#artGlow)"/>
+                <g class="modal-art-rings" fill="none" stroke="var(--cat)" stroke-opacity=".35">
+                    <circle cx="200" cy="88" r="42"/><circle cx="200" cy="88" r="64"/><circle cx="200" cy="88" r="86"/>
+                </g>
+            </svg>
+            <span class="modal-art-icon"><svg class="icon" aria-hidden="true"><use id="modal-icon-use" href="#i-universe"/></svg></span>
+        </div>
+
+        <div class="modal-body">
+            <span class="badge" id="modal-badge"></span>
+            <h3 class="modal-title" id="modal-title"></h3>
+            <p class="modal-date" id="modal-date"></p>
+            <p class="modal-description" id="modal-description"></p>
+
+            <div class="modal-meta">
+                <div class="meta-item">
+                    <span class="meta-label" data-i18n="ui.cosmicTime">Космічний час</span>
+                    <span class="meta-value" id="modal-cosmic-time"></span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label" data-i18n="ui.realTime">Реальний час</span>
+                    <span class="meta-value" id="modal-real-time"></span>
+                </div>
+            </div>
+
+            <div class="modal-progress">
+                <div class="modal-progress-head">
+                    <span data-i18n="ui.progress">Пройдено космічного року</span>
+                    <b id="modal-progress-value">0%</b>
+                </div>
+                <div class="modal-progress-track"><span id="modal-progress-fill"></span></div>
+            </div>
+        </div>
+
+        <nav class="modal-nav">
+            <button class="btn btn--ghost" id="modal-prev" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+                <span data-i18n="ui.prevEvent">Попередня подія</span>
+            </button>
+            <button class="btn btn--ghost" id="modal-next" type="button">
+                <span data-i18n="ui.nextEvent">Наступна подія</span>
+                <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+            </button>
+        </nav>
+    </div>
+</div>
+
+<script src="cosmic-events.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
